@@ -2,7 +2,7 @@ from webbrowser import Chrome
 
 import pytest
 
-@pytest.fixture
+@pytest.fixture(scope = "session")
 def browser():
     print("Browser!")
 
@@ -24,6 +24,11 @@ def login_page(browser):
 
 
 def test_login(login_page, user):
+    username, password = user
+    assert username == "username"
+    assert password == "password"
+
+def test_logout(login_page, user):
     username, password = user
     assert username == "username"
     assert password == "password"
